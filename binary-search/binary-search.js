@@ -1,8 +1,27 @@
 'use strict';
 
 // Complete this algo
-const binarySearch = (array, target) => {
-	
+const binarySearch = (
+  array,
+  target,
+  startIdx = 0,
+  endIdx = array.length - 1
+) => {
+  if (!array.length || typeof target !== 'number') {
+    return false;
+  }
+  const midpoint = Math.floor((endIdx - startIdx) / 2 + startIdx);
+  if (array[midpoint] === target) {
+    return true;
+  }
+  if (endIdx - startIdx === 1) {
+    return array[endIdx] === target;
+  }
+  if (array[midpoint] > target) {
+    return binarySearch(array, target, 0, midpoint);
+  } else {
+    return binarySearch(array, target, midpoint, endIdx);
+  }
 };
 
 /*
@@ -14,4 +33,4 @@ const binarySearch = (array, target) => {
 
 */
 
-module.exports = binarySearch
+module.exports = binarySearch;
